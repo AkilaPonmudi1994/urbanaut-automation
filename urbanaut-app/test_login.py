@@ -36,7 +36,7 @@ class TestUrbanaut:
         self.driver.find_element(By.ID, "Login").click()
         self.driver.find_element(By.ID, "sign-up").click()
         self.driver.find_element(By.ID, "signup-name").send_keys("Akila")
-        self.driver.find_element(By.ID, "signup-email").send_keys("akilap15@gmail.com")
+        self.driver.find_element(By.ID, "signup-email").send_keys("akilap99@gmail.com")
         self.driver.find_element(By.ID, "signup-city").send_keys("Coimbatore")
         self.driver.find_element(By.NAME, "password").send_keys("Akila@123")
         self.driver.find_element(By.NAME, "repassword").send_keys("Akila@123")
@@ -44,26 +44,26 @@ class TestUrbanaut:
         self.driver.find_element(By.ID, "sign-up").click()
         assert self.driver.title=="Travel better with Urbanaut"
         print("Logged in to the urbanaut application successfully")
-        self.driver.implicitly_wait(5)
         #Testing logout after signup
-        profile_element = self.driver.find_element(By.ID, "profile_pic")
+        profile_element = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.ID, "profile_pic"))
+        )
+        assert profile_element.is_displayed()
         profile_element.click()
-        assert  profile_element.is_displayed()
         self.driver.find_element(By.ID, "logout").click()
-        time.sleep(2)
+        time.sleep(3)
 
     def test_login_success(self):
         """Login to the application
         """
         self.driver.find_element(By.ID, "Login").click()
-        self.driver.find_element(By.ID, "login-email").send_keys("akilap13@urbanaut.com")
+        self.driver.find_element(By.ID, "login-email").send_keys("akilap07@gmail.com")
         self.driver.find_element(By.ID, "login-password").send_keys("Akila@123")
         self.driver.find_element(By.ID, "login").click()
         # Wait up to 10 seconds for the profile picture element to be visible
         profile_element = WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((By.ID, "profile_pic"))
         )
-        assert profile_element.is_displayed()
         profile_element.click()
         self.driver.find_element(By.ID, "logout").click()
         time.sleep(3)
